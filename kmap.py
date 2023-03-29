@@ -1,12 +1,9 @@
 from turtle import *
 
 """
-
 Автор : Молотков Даниил
-
 github: https://github.com/MolotkovD
 vk: https://vk.com/molotkov2005
-
 """
 
 
@@ -14,8 +11,6 @@ class KMap:
     def __init__(self, speed_par=0, size_ball=40):
 
         """
-
-
         :param speed_par: скорость черепахи (по дефолту inf+)
         :param size_ball: диаметр шарика (по дефолту 40)
         """
@@ -67,36 +62,46 @@ class KMap:
         goto(x, y)
         down()
 
-    def init_robot(self, x_robot: int or float, y_robot: int or float, x_park: int or float, y_park: int or float,
-                   wight_park: int or float, colour: str, work_area: int = 120, work_area_visual: bool = False) -> None:
+    def init_robot(
+        self,
+        x_robot: int or float,
+        y_robot: int or float,
+        x_park: int or float,
+        y_park: int or float,
+        wight_park: int or float,
+        colour: str,
+        work_area: int = 120,
+        work_area_visual: bool = False,
+    ) -> None:
         """
-
-            ВАЖНОЕ УТОЧНЕНИЕ! ВСЕ ТОЧКИ КОТОРЫЕ ВЫ УКАЗЫВАЕТЕ ЯВЛЯЮТСЯ НИЖНИМ ЛЕВЫМ УГЛОМ
-
-            :param x_robot: позиция робота по координате x
-            :param y_robot: позиция робота по координате y
-            :param x_park: позиция парковки по координате x
-            :param y_park: позиция парковки по координате y
-            :param wight_park: ширина парковки
-            :param colour: общий цвет
-            :param work_area: рабочая зона (по дефолту 120)
-            :param work_area_visual: отображение нерабочей зоны (по дефолту False)
+        ВАЖНОЕ УТОЧНЕНИЕ! ВСЕ ТОЧКИ КОТОРЫЕ ВЫ УКАЗЫВАЕТЕ ЯВЛЯЮТСЯ НИЖНИМ ЛЕВЫМ УГЛОМ
+        :param x_robot: позиция робота по координате x
+        :param y_robot: позиция робота по координате y
+        :param x_park: позиция парковки по координате x
+        :param y_park: позиция парковки по координате y
+        :param wight_park: ширина парковки
+        :param colour: общий цвет
+        :param work_area: рабочая зона (по дефолту 120)
+        :param work_area_visual: отображение нерабочей зоны (по дефолту False)
         """
         self.robot(x_robot, y_robot, colour, work_area, work_area_visual)
         self.parking(x_park, y_park, wight_park, colour)
 
-    def platform(self, x: int or float, y: int or float, num_col: int, num_row: int,
-                 step: int or float) -> None:
+    def platform(
+        self,
+        x: int or float,
+        y: int or float,
+        num_col: int,
+        num_row: int,
+        step: int or float,
+    ) -> None:
         """
-
         ВАЖНОЕ УТОЧНЕНИЕ! ВСЕ ТОЧКИ КОТОРЫЕ ВЫ УКАЗЫВАЕТЕ ЯВЛЯЮТСЯ НИЖНИМ ЛЕВЫМ УГЛОМ
-
         :param x: позиция платформы по координате x
         :param y: позиция платформы по координате н
         :param num_col: количество колонок
         :param num_row: количество строк
         :param step: отступ
-
         """
 
         up()
@@ -126,9 +131,7 @@ class KMap:
 
     def point_creation(self, x: int, y: int, col: int, row: int, colour: str):
         """
-
         ВАЖНОЕ УТОЧНЕНИЕ! ВСЕ ТОЧКИ КОТОРЫЕ ВЫ УКАЗЫВАЕТЕ ЯВЛЯЮТСЯ НИЖНИМ ЛЕВЫМ УГЛОМ
-
         :param x: позиция таблицы по координате x
         :param y: позиция таблицы по координате н
         :param col: количество колонок
@@ -140,18 +143,31 @@ class KMap:
                 up()
                 goto(x + x_ * self.size_ball, y + y_ * self.size_ball)
                 dot(self.size_ball, colour)
-                self.ball_list[len(self.ball_list) + 1] = {"pos": (x + x_ * self.size_ball, y + y_ * self.size_ball),
-                                                           "color": colour}
+                self.ball_list[len(self.ball_list) + 1] = {
+                    "pos": (x + x_ * self.size_ball, y + y_ * self.size_ball),
+                    "color": colour,
+                }
 
     def get_ball(self, x, y):
         self.buffer = not self.buffer
         if self.buffer:
             stst_ = False
             for posing in range(len(self.ball_list)):
-                if x in range(int(int(self.ball_list[posing + 1]["pos"][0]) - self.size_ball // 2),
-                              int(int(self.ball_list[posing + 1]["pos"][0]) + self.size_ball // 2)) \
-                        and y in range(int(int(self.ball_list[posing + 1]["pos"][1]) - self.size_ball // 2),
-                                       int(int(self.ball_list[posing + 1]["pos"][1]) + self.size_ball // 2)):
+                if x in range(
+                    int(
+                        int(self.ball_list[posing + 1]["pos"][0]) - self.size_ball // 2
+                    ),
+                    int(
+                        int(self.ball_list[posing + 1]["pos"][0]) + self.size_ball // 2
+                    ),
+                ) and y in range(
+                    int(
+                        int(self.ball_list[posing + 1]["pos"][1]) - self.size_ball // 2
+                    ),
+                    int(
+                        int(self.ball_list[posing + 1]["pos"][1]) + self.size_ball // 2
+                    ),
+                ):
                     self.buffer_ball = {posing + 1: self.ball_list[posing + 1]}
                     stst_ = True
 
@@ -165,14 +181,25 @@ class KMap:
             dot(self.size_ball, "#fff")
             # dot(5, "#000")
             for posing in self.platform_poss:
-                if x in range(int(posing[0] - self.size_ball // 2), int(posing[0] + self.size_ball // 2)) and \
-                        y in range(int(posing[1] - self.size_ball // 2), int(posing[1] + self.size_ball // 2)):
+                if x in range(
+                    int(posing[0] - self.size_ball // 2),
+                    int(posing[0] + self.size_ball // 2),
+                ) and y in range(
+                    int(posing[1] - self.size_ball // 2),
+                    int(posing[1] + self.size_ball // 2),
+                ):
                     up()
                     goto(posing)
                     down()
-                    dot(self.size_ball, self.buffer_ball[list(self.buffer_ball.keys())[0]]["color"])
+                    dot(
+                        self.size_ball,
+                        self.buffer_ball[list(self.buffer_ball.keys())[0]]["color"],
+                    )
 
-                    self.ball_list[list(self.buffer_ball.keys())[0]]["pos"] = (int(posing[0]), int(posing[1]))
+                    self.ball_list[list(self.buffer_ball.keys())[0]]["pos"] = (
+                        int(posing[0]),
+                        int(posing[1]),
+                    )
                     stat = True
                     self.buffer_ball = None
 
@@ -180,14 +207,22 @@ class KMap:
                 up()
                 goto(x, y)
                 down()
-                dot(self.size_ball, self.buffer_ball[list(self.buffer_ball.keys())[0]]["color"])
+                dot(
+                    self.size_ball,
+                    self.buffer_ball[list(self.buffer_ball.keys())[0]]["color"],
+                )
                 self.ball_list[list(self.buffer_ball.keys())[0]]["pos"] = (x, y)
                 self.buffer_ball = None
 
     def delete_ball(self, x, y):
         for posing in self.platform_poss:
-            if x in range(int(posing[0] - self.size_ball // 2), int(posing[0] + self.size_ball // 2)) and \
-                    y in range(int(posing[1] - self.size_ball // 2), int(posing[1] + self.size_ball // 2)):
+            if x in range(
+                int(posing[0] - self.size_ball // 2),
+                int(posing[0] + self.size_ball // 2),
+            ) and y in range(
+                int(posing[1] - self.size_ball // 2),
+                int(posing[1] + self.size_ball // 2),
+            ):
                 up()
                 goto(posing)
                 dot(self.size_ball, "#fff")
